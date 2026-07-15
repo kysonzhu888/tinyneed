@@ -1,0 +1,12 @@
+name = "tinyneed"
+pages_build_output_dir = ".deploy"
+compatibility_date = "2026-07-01"
+
+[vars]
+COMMENT_SITE_NAME = "TinyNeed"
+COMMENT_PAGE_PATH = "/"
+
+[[d1_databases]]
+binding = "COMMENTS_DB"
+database_name = "tinyneed-comments"
+database_id = "ac586f47-b8f1-4c8b-a678-843b5e2e1a7b"
