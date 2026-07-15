@@ -44,7 +44,9 @@ test("distinguishes app privacy from website analytics", async () => {
 
   for (const relativePath of ["receiptclaim/index.html", ".deploy-receiptclaim/index.html"]) {
     const homepage = await readFile(path.join(root, relativePath), "utf8");
-    assert.match(homepage, /ReceiptClaim app has no account system, analytics/i, relativePath);
+    assert.match(homepage, /Google ML Kit processes receipt images on-device/i, relativePath);
+    assert.match(homepage, /limited, unlinked diagnostic and usage metrics/i, relativePath);
+    assert.match(homepage, /does not send receipt images or recognized text/i, relativePath);
     assert.match(homepage, /website uses Cloudflare Web Analytics/i, relativePath);
     assert.match(homepage, /never receives receipt content/i, relativePath);
   }
@@ -56,6 +58,9 @@ test("distinguishes app privacy from website analytics", async () => {
     const privacyPolicy = await readFile(path.join(root, relativePath), "utf8");
     assert.match(privacyPolicy, /Website analytics/, relativePath);
     assert.match(privacyPolicy, /Cloudflare Web Analytics/, relativePath);
+    assert.match(privacyPolicy, /per-installation identifier/i, relativePath);
+    assert.match(privacyPolicy, /not linked to you/i, relativePath);
+    assert.match(privacyPolicy, /not used for tracking or advertising/i, relativePath);
     assert.match(privacyPolicy, /does not accept or upload receipt photos/i, relativePath);
   }
 });
