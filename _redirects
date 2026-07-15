@@ -1,0 +1,3 @@
+/receiptclaim / https://receiptclaim.tinyneed.com/ 301
+/receiptclaim/ https://receiptclaim.tinyneed.com/ 301
+/receiptclaim/* https://receiptclaim.tinyneed.com/:splat 301
