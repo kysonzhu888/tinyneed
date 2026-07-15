@@ -59,8 +59,17 @@ test("distinguishes app privacy from website analytics", async () => {
     assert.match(privacyPolicy, /Website analytics/, relativePath);
     assert.match(privacyPolicy, /Cloudflare Web Analytics/, relativePath);
     assert.match(privacyPolicy, /per-installation identifier/i, relativePath);
-    assert.match(privacyPolicy, /not linked to you/i, relativePath);
-    assert.match(privacyPolicy, /not used for tracking or advertising/i, relativePath);
+    assert.match(privacyPolicy, /feature input and output sizes/i, relativePath);
+    assert.match(privacyPolicy, /feature versions/i, relativePath);
+    assert.match(
+      privacyPolicy,
+      /not intended to uniquely identify a user or physical device/i,
+      relativePath,
+    );
+    assert.match(privacyPolicy, /does not use these metrics for advertising or tracking/i, relativePath);
+    assert.match(privacyPolicy, /ml-kit\/android-data-disclosure/i, relativePath);
+    assert.match(privacyPolicy, /ml-kit\/ios-data-disclosure/i, relativePath);
+    assert.match(privacyPolicy, /Android.*diagnostics and usage analytics/i, relativePath);
     assert.match(privacyPolicy, /does not accept or upload receipt photos/i, relativePath);
   }
 });
