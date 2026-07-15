@@ -1,0 +1,9 @@
+.deploy/
+.deploy-receiptclaim/
+.wrangler/
+node_modules/
+*.log
+.DS_Store
+*启动与部署记录.md
+.dev.vars*
+.env*
