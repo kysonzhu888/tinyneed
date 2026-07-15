@@ -38,3 +38,24 @@ test("states the current ReceiptClaim platform availability without dead store l
     assert.doesNotMatch(homepage, /apps\.apple\.com|play\.google\.com/, relativePath);
   }
 });
+
+test("distinguishes app privacy from website analytics", async () => {
+  execFileSync(process.execPath, ["tools/build.mjs"], { cwd: root, stdio: "pipe" });
+
+  for (const relativePath of ["receiptclaim/index.html", ".deploy-receiptclaim/index.html"]) {
+    const homepage = await readFile(path.join(root, relativePath), "utf8");
+    assert.match(homepage, /ReceiptClaim app has no account system, analytics/i, relativePath);
+    assert.match(homepage, /website uses Cloudflare Web Analytics/i, relativePath);
+    assert.match(homepage, /never receives receipt content/i, relativePath);
+  }
+
+  for (const relativePath of [
+    "receiptclaim/privacy/index.html",
+    ".deploy-receiptclaim/privacy/index.html",
+  ]) {
+    const privacyPolicy = await readFile(path.join(root, relativePath), "utf8");
+    assert.match(privacyPolicy, /Website analytics/, relativePath);
+    assert.match(privacyPolicy, /Cloudflare Web Analytics/, relativePath);
+    assert.match(privacyPolicy, /does not accept or upload receipt photos/i, relativePath);
+  }
+});
