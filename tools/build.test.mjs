@@ -8,6 +8,25 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
+async function listHtmlDocuments(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const htmlDocuments = [];
+
+  for (const entry of entries) {
+    const entryPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      htmlDocuments.push(...await listHtmlDocuments(entryPath));
+      continue;
+    }
+
+    if (!entry.name.endsWith(".html")) continue;
+    const contents = await readFile(entryPath, "utf8");
+    if (/<\/html>/i.test(contents)) htmlDocuments.push(entryPath);
+  }
+
+  return htmlDocuments;
+}
+
 test("builds real 404 pages for the TinyNeed and ReceiptClaim deployments", async () => {
   execFileSync(process.execPath, ["tools/build.mjs"], { cwd: root, stdio: "pipe" });
 
@@ -71,5 +90,20 @@ test("distinguishes app privacy from website analytics", async () => {
     assert.match(privacyPolicy, /ml-kit\/ios-data-disclosure/i, relativePath);
     assert.match(privacyPolicy, /Android.*diagnostics and usage analytics/i, relativePath);
     assert.match(privacyPolicy, /does not accept or upload receipt photos/i, relativePath);
+  }
+});
+
+test("injects Cloudflare Web Analytics exactly once into every ReceiptClaim HTML document", async () => {
+  execFileSync(process.execPath, ["tools/build.mjs"], { cwd: root, stdio: "pipe" });
+
+  const deployRoot = path.join(root, ".deploy-receiptclaim");
+  const htmlDocuments = await listHtmlDocuments(deployRoot);
+  assert.ok(htmlDocuments.length > 0);
+
+  for (const htmlPath of htmlDocuments) {
+    const contents = await readFile(htmlPath, "utf8");
+    const beacons = contents.match(/static\.cloudflareinsights\.com\/beacon\.min\.js/g) ?? [];
+    assert.equal(beacons.length, 1, path.relative(root, htmlPath));
+    assert.match(contents, /data-cf-beacon='\{"token":"[a-f0-9]{32}"\}'/, path.relative(root, htmlPath));
   }
 });

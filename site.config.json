@@ -4,6 +4,7 @@
   "description": "Small practical calculators and local tools for everyday needs, including Ojol income, GCash fee, and Mac hotspot data tools.",
   "contactEmail": "hello@tinyneed.com",
   "googleAnalyticsId": "",
+  "cloudflareWebAnalyticsToken": "8766e0f1c5cf486f81c867118dce77c5",
   "adsenseClientId": "ca-pub-7896672979027584",
   "adsensePublisherId": "pub-7896672979027584",
   "searchConsoleVerification": ""
