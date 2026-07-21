@@ -36,6 +36,12 @@ test("builds real 404 pages for the TinyNeed and ReceiptClaim deployments", asyn
   }
 
   assert.equal(existsSync(path.join(root, ".deploy/wrangler.toml")), false);
+  assert.equal(
+    existsSync(path.join(root, ".deploy/functions/api/aurora-email.js")),
+    true,
+    "Aurora email relay must be bundled with the TinyNeed Pages deployment",
+  );
+  assert.equal(existsSync(path.join(root, ".deploy/tests")), false);
   assert.equal(existsSync(path.join(root, ".deploy-receiptclaim/wrangler.toml")), false);
   assert.equal(
     await readFile(path.join(root, ".deploy-receiptclaim/styles.css"), "utf8"),
