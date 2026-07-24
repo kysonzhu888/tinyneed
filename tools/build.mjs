@@ -31,6 +31,7 @@ const include = [
 
 const receiptClaimInclude = [
   "index.html",
+  "_redirects",
   "404.html",
   "privacy",
   "support",
