@@ -1,0 +1,2 @@
+# UA-aware later; iOS is the only live store today, so send everyone to the App Store.
+/get https://apps.apple.com/app/id6790108949 302
