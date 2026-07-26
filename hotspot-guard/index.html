@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hotspot Guard - Stop apps from burning your hotspot data</title>
+    <meta name="description" content="A menu bar guard for macOS. Watches per-app data use on your iPhone hotspot and stops the app that runs away with it.">
+    <meta property="og:title" content="Hotspot Guard">
+    <meta property="og:description" content="Stop apps from burning your hotspot data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tinyneed.com/hotspot-guard/">
+    <meta name="theme-color" content="#31456a">
+    <link rel="canonical" href="https://tinyneed.com/hotspot-guard/">
+    <link rel="stylesheet" href="/styles.css?v=hotspot-20260726-1">
+    <style>
+      .hg-wrap { max-width: 820px; margin: 0 auto; padding: 32px 20px 64px; }
+      .hg-hero h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 12px; }
+      .hg-lede { font-size: 1.1rem; color: #3f4a55; margin: 0 0 28px; }
+      .hg-get { display: flex; gap: 28px; flex-wrap: wrap; align-items: center;
+                padding: 24px; border: 1px solid #e2e6ee; border-radius: 14px;
+                background: #fafbfd; margin-bottom: 32px; }
+      .hg-get-main { flex: 1 1 280px; }
+      .hg-btn { display: inline-block; background: #31456a; color: #fff;
+                padding: 13px 26px; border-radius: 9px; font-weight: 600;
+                text-decoration: none; }
+      .hg-btn:hover { background: #24334f; }
+      .hg-meta { font-size: .85rem; color: #5b6470; margin-top: 10px; line-height: 1.7; }
+      .hg-qr { text-align: center; }
+      .hg-qr img { width: 132px; height: 132px; display: block; }
+      .hg-qr figcaption { font-size: .78rem; color: #5b6470; margin-top: 6px; }
+      .hg-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+      .hg-card h3 { margin: 0 0 6px; font-size: 1rem; }
+      .hg-card p { margin: 0; color: #3f4a55; font-size: .93rem; line-height: 1.6; }
+      .hg-note { border-left: 3px solid #d8dde7; padding-left: 14px; color: #5b6470;
+                 font-size: .9rem; line-height: 1.7; margin-top: 32px; }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="TinyNeed home">
+        <span class="brand-mark">Tn</span>
+        <span>TinyNeed</span>
+      </a>
+    </header>
+
+    <main class="hg-wrap">
+      <section class="hg-hero">
+        <h1>Stop apps from burning your hotspot data</h1>
+        <p class="hg-lede">
+          Hotspot Guard is a macOS menu bar tool. It watches how much data each app
+          pulls over your iPhone hotspot, and steps in when one of them runs away with it.
+        </p>
+      </section>
+
+      <section class="hg-get">
+        <div class="hg-get-main">
+          <a class="hg-btn" href="/hotspot-guard/assets/HotspotGuard-Pro-1.0.1.zip">
+            Download for macOS
+          </a>
+          <p class="hg-meta">
+            Version 1.0.1 &middot; 461 KB &middot; macOS 14 or later (Apple silicon)<br>
+            Signed with a Developer ID and notarized by Apple &mdash; opens without warnings.<br>
+            Early access: free for now. Planned: 14-day trial, then $12 one time.
+          </p>
+        </div>
+        <figure class="hg-qr">
+          <img src="/hotspot-guard/assets/qr.png" alt="QR code linking to this page"
+               width="132" height="132">
+          <figcaption>Scan to open this page</figcaption>
+        </figure>
+      </section>
+
+      <section class="hg-grid">
+        <div class="hg-card">
+          <h3>Per-app limits, not all-or-nothing</h3>
+          <p>Set how much an app may use in a minute or an hour. Apps keep working
+             normally until they cross the line.</p>
+        </div>
+        <div class="hg-card">
+          <h3>Warns before it acts</h3>
+          <p>Highlight, notify, ask, or step in automatically &mdash; you choose the
+             level for each rule. Automatic action is off by default.</p>
+        </div>
+        <div class="hg-card">
+          <h3>Knows when you are on the hotspot</h3>
+          <p>It only guards on metered connections and goes idle on regular Wi-Fi,
+             so it never gets in your way at home.</p>
+        </div>
+        <div class="hg-card">
+          <h3>Ignores local traffic</h3>
+          <p>AirDrop, Bonjour, and anything on your local network never counts
+             against your plan, because it never touched the hotspot.</p>
+        </div>
+        <div class="hg-card">
+          <h3>Keeps big downloads off the hotspot</h3>
+          <p>Mark Xcode, Docker, or any command line tool as blocked, and it asks
+             you the moment they reach for the network.</p>
+        </div>
+        <div class="hg-card">
+          <h3>Monthly budget with a forecast</h3>
+          <p>See what is left in your plan and whether you are on track to run out
+             before the billing period ends.</p>
+        </div>
+      </section>
+
+      <p class="hg-note">
+        Hotspot Guard runs entirely on your Mac. It has no account, sends no telemetry,
+        and does not use the network at all while you are on a hotspot. Everything it
+        measures stays on your machine.
+      </p>
+    </main>
+  </body>
+</html>
