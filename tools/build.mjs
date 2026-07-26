@@ -25,6 +25,7 @@ const include = [
   "contact",
   "privacy",
   "receiptclaim",
+  "hotspot-guard",
   "assets",
   "functions"
 ];
