@@ -49,7 +49,7 @@ test("builds real 404 pages for the TinyNeed and ReceiptClaim deployments", asyn
   );
   assert.deepEqual(
     (await readdir(path.join(root, ".deploy-receiptclaim"))).sort(),
-    ["404.html", "assets", "index.html", "privacy", "robots.txt", "sitemap.xml", "styles.css", "support"],
+    ["404.html", "_redirects", "assets", "index.html", "privacy", "robots.txt", "sitemap.xml", "styles.css", "support"],
   );
 });
 
