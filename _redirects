@@ -3,4 +3,4 @@
 /receiptclaim/* https://receiptclaim.tinyneed.com/:splat 301
 # Stable download alias for directory listings (MacUpdate etc.).
 # 302 on purpose: target moves every release; 301 would be cached forever.
-/hotspot-guard/download /hotspot-guard/assets/HotspotGuard-Pro-1.0.10.zip 302
+/hotspot-guard/download /hotspot-guard/assets/HotspotGuard-Pro-1.0.11.zip 302
