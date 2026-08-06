@@ -57,12 +57,19 @@
 
       <section class="hg-get">
         <div class="hg-get-main">
-          <a class="hg-btn" href="/hotspot-guard/assets/HotspotGuard-Pro-1.0.11.zip">
+          <a class="hg-btn" href="/hotspot-guard/assets/HotspotGuard-Pro-1.0.12.zip">
             Download for macOS
           </a>
           <p class="hg-meta">
-            Version 1.0.11 &middot; 911 KB &middot; macOS 14 or later (Apple silicon)<br>
+            Version 1.0.12 &middot; 933 KB &middot; macOS 14 or later (Apple silicon)<br>
             Signed with a Developer ID and notarized by Apple &mdash; opens without warnings.<br>
+            1.0.12 adds an optional update check. It asks once, inside the menu panel,
+            and does nothing until you say yes. If you allow it, once a day the app asks
+            this site whether a newer version exists, sending only the app version and
+            your macOS version &mdash; no account, no usage data, no app names. Say no and
+            it never connects. This exists because there was previously no way to tell you
+            a fix had shipped, and ten builds have been pulled for real defects. 1.0.12
+            also fixes the tether hint coming back after every relaunch once dismissed.<br>
             1.0.11 actually fixes per-app measurement. 1.0.10 was released claiming to fix it
             and did not: on a phone hotspot the list still read &ldquo;No traffic yet&rdquo;
             while data was being used, even though the monthly total kept climbing. Each
