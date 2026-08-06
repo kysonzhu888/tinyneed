@@ -1,0 +1,12 @@
+# Hotspot Guard 的更新清单。
+#
+# 短缓存（5 分钟）而不是默认的长缓存：发新版时改的就是这个文件，
+# 长缓存会让「已经发布了但用户还查不到」持续数小时，而这个窗口期里
+# 下载页写的是新版、清单说的是旧版，两边对不上最难排查。
+#
+# 注意：边缘缓存命中**不影响**把这个请求当活跃度信号用——
+# 客户端的请求照样到达 Cloudflare 边缘并计入 zone 日志，
+# 缓存只决定回源与否。
+/hotspot-guard/appcast.json
+  Cache-Control: public, max-age=300
+  Content-Type: application/json; charset=utf-8
