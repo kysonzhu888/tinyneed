@@ -21,6 +21,9 @@ const include = [
   "sitemap.xml",
   "ads.txt",
   "_redirects",
+  // _headers 和 _redirects 一样是 Pages 的控制文件，漏了不会报错——
+  // 只是所有自定义响应头静默失效（当前用途是给 appcast.json 设短缓存）。
+  "_headers",
   "about",
   "contact",
   "privacy",
