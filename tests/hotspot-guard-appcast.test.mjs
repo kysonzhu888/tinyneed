@@ -54,6 +54,27 @@ test("清单体积远小于客户端 64 KB 的上限", () => {
   assert.ok(readFileSync(appcastPath).byteLength < 4096);
 });
 
+test("🚨 appcast.json 与 _headers 都必须在 build allowlist 里", () => {
+  // build.mjs 是 allowlist 制：不在名单里的文件**不会进 .deploy**，
+  // 而且不报错。表现是「本地文件在、线上 404」或「响应头静默失效」，
+  // 这个仓库已经为此踩过两次（functions 漏掉抹掉线上 API、
+  // wrangler.toml 误入被公开）。
+  const build = readFileSync(
+    fileURLToPath(new URL("../tools/build.mjs", import.meta.url)),
+    "utf8",
+  );
+  const include = build.slice(
+    build.indexOf("const include = ["),
+    build.indexOf("];", build.indexOf("const include = [")),
+  );
+  assert.match(include, /"hotspot-guard"/, "appcast.json 所在目录必须在 allowlist");
+  assert.match(include, /"_headers"/, "_headers 不在 allowlist 时缓存头会静默失效");
+  // 反向：安全边界不能破
+  assert.doesNotMatch(include, /"wrangler\.toml"/);
+  assert.doesNotMatch(include, /"site\.config\.json"/);
+  assert.match(include, /"functions"/, "漏掉 functions 会抹掉线上 API");
+});
+
 test("🚨 appcast 的版本不得高于 _redirects 里 302 别名实际指向的包", () => {
   // 两者不一致时的表现是：客户端说"有 1.0.12"，点下载却拿到 1.0.11 的包，
   // 用户会认为更新功能坏了。发版必须同时改这两个文件。
