@@ -38,6 +38,11 @@ const receiptClaimInclude = [
   "_redirects",
   "404.html",
   "privacy",
+  // The paywall links to /terms/ to satisfy App Store Guideline 3.1.2, which
+  // requires functional links to both terms and privacy. Omitting it here does
+  // not fail the build — the page just never deploys and the link 404s, which
+  // is exactly how a review rejection gets shipped.
+  "terms",
   "support",
   "robots.txt",
   "sitemap.xml",

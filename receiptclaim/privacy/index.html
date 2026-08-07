@@ -12,20 +12,29 @@
     <main class="simple-page legal-page">
       <a class="back-link" href="/">Back to ReceiptClaim</a>
       <h1>ReceiptClaim Privacy Policy</h1>
-      <p><strong>Effective date:</strong> July 15, 2026</p>
-      <p>ReceiptClaim is a local-first receipt splitting app published by TinyNeed. We designed the app so your receipt data does not need to leave your device.</p>
+      <p><strong>Effective date:</strong> August 7, 2026</p>
+      <p>ReceiptClaim is a receipt splitting app published by TinyNeed. It creates no account, shows no ads, tracks no location, touches no payment account, and sells no personal data. Everything below describes the only ways receipt data is handled.</p>
+      <p>Version 2.0 added an optional cloud recognition step. Because that changes what leaves your device, the two paths are described separately, and the app tells you which one it is about to use.</p>
 
-      <h2>Data the app processes</h2>
-      <p>When you choose or photograph a receipt, the app processes that image on your device to recognize text. The app stores the current receipt draft, item claims, participant names, and adjustments locally on that device so you can continue later.</p>
+      <h2>On-device recognition</h2>
+      <p>When you choose or photograph a receipt, the app can recognize the text on your device using Google ML Kit. In ReceiptClaim 1.1 and earlier this is the only recognition path, and no receipt image or recognized text is sent anywhere.</p>
+      <p>ML Kit may send Google limited device and app information, a per-installation identifier, performance metrics, API configuration, feature input and output sizes, feature versions, event types, and error codes. Google describes these metrics as used for diagnostics and usage analytics, states that input images, input text, and recognition results stay on the device, and states that the per-installation identifiers are not intended to uniquely identify a user or physical device. Google states that the Android data is encrypted in transit and is not shared with third parties. ReceiptClaim does not use these metrics for advertising or tracking. See Google's <a href="https://developers.google.com/ml-kit/android-data-disclosure">ML Kit Android data disclosure</a>, <a href="https://developers.google.com/ml-kit/ios-data-disclosure">ML Kit iOS data disclosure</a>, and <a href="https://developers.google.com/ml-kit/terms">ML Kit terms</a>.</p>
 
-      <h2>Data we collect</h2>
-      <p>ReceiptClaim does not create accounts or send receipt photos, recognized text, participant names, claims, adjustments, or settlement data to TinyNeed. The app uses Google ML Kit for on-device text recognition. ML Kit may send Google limited device and app information, a per-installation identifier, performance metrics, API configuration, feature input and output sizes, feature versions, event types, and error codes. On Android and iOS, Google describes these metrics as used for diagnostics and usage analytics. Google states that input images, input text, and recognition results stay on the device. The per-installation identifiers are not intended to uniquely identify a user or physical device. Google states that the Android data is encrypted in transit and is not shared with third parties. ReceiptClaim does not use these metrics for advertising or tracking. See Google's <a href="https://developers.google.com/ml-kit/android-data-disclosure">ML Kit Android data disclosure</a>, <a href="https://developers.google.com/ml-kit/ios-data-disclosure">ML Kit iOS data disclosure</a>, and <a href="https://developers.google.com/ml-kit/terms">ML Kit terms</a>. ReceiptClaim does not show ads, track your location, access payment accounts, or sell personal data.</p>
+      <h2>Cloud recognition (version 2.0 and later)</h2>
+      <p>Cloud recognition reads harder receipts more accurately than a phone can. The app explains this before the first time it would use it. If you decline, that choice is remembered and no receipt image is ever sent; on-device recognition remains fully available and unlimited.</p>
+      <p>When cloud recognition runs, the receipt image is sent over an encrypted connection to the ReceiptClaim service, which forwards it to AI model providers — currently Google and OpenAI — through the routing service OpenRouter. Two different providers read the same image so their results can be compared, which is what allows the app to tell you when a reading is uncertain.</p>
+      <p><strong>The ReceiptClaim service keeps no copy.</strong> The image and the recognized text pass through it and are discarded when the response is returned; neither is written to storage or logs. Requests are routed only to providers that do not retain prompts, and models that would require retention are blocked in the service's own code rather than by policy alone.</p>
+      <p>We do not send participant names, item claims, adjustments, or settlement data to the cloud. Only the receipt image is sent, and only for the scan you asked for.</p>
+
+      <h2>What we store</h2>
+      <p>To count cloud scans against your monthly allowance, the app generates a random identifier the first time cloud recognition is used and stores it on your device. It is not derived from your hardware, is not shared with the model providers, and carries no meaning anywhere else — reinstalling the app produces a new one and simply starts a fresh allowance. Our service stores that identifier together with your scan counts and, if you purchase, the receipt token the app store issues so the purchase can be validated. No receipt content is stored against it.</p>
+      <p>Local receipt drafts, item claims, participant names, adjustments, and history stay on your device.</p>
 
       <h2>Website analytics</h2>
       <p>This website is hosted and protected by Cloudflare and uses Cloudflare Web Analytics to measure aggregate site traffic and performance. It does not accept or upload receipt photos, recognized receipt text, participant names, or settlement data, so that content is not part of website analytics. Cloudflare may process website request and analytics data under its <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a>.</p>
 
       <h2>Camera and photo access</h2>
-      <p>Camera and photo-library permissions are used only when you ask the app to capture or choose a receipt. On-device Google ML Kit text recognition reads the selected image. The app does not send the image or recognized receipt text to Google or TinyNeed; the limited SDK metrics described above do not contain receipt content.</p>
+      <p>Camera and photo-library permissions are used only when you ask the app to capture or choose a receipt. The selected image is read by on-device recognition, and — if you are using version 2.0 or later and have not declined cloud recognition — sent for the cloud reading described above. No other image is accessed, and the limited ML Kit metrics described above never contain receipt content.</p>
 
       <h2>Storage and deletion</h2>
       <p>The current draft remains on your device until you start another receipt, clear the app's storage, or uninstall the app. Starting another receipt clears the saved draft inside ReceiptClaim.</p>
