@@ -75,6 +75,53 @@ test("🚨 appcast.json 与 _headers 都必须在 build allowlist 里", () => {
   assert.match(include, /"functions"/, "漏掉 functions 会抹掉线上 API");
 });
 
+test("🚨 版本化清单路径必须有 200 rewrite 回同一份 appcast.json", () => {
+  // 1.0.13+ 客户端请求 /hotspot-guard/appcast/<version>.json——版本进 path
+  // 是 CF free plan 下拿到版本分布的唯一办法（边缘日志没有完整 UA）。
+  // rewrite 必须是 200 而不是 302：302 会让同一次 check-in 在日志里
+  // 变成两条请求，且多一跳网络往返。
+  const redirects = readFileSync(
+    fileURLToPath(new URL("../_redirects", import.meta.url)),
+    "utf8",
+  );
+  const line = redirects
+    .split("\n")
+    .find((row) => row.startsWith("/hotspot-guard/appcast/"));
+  assert.ok(line, "_redirects 里必须有 /hotspot-guard/appcast/* 的 rewrite");
+  const [source, target, status] = line.trim().split(/\s+/);
+  assert.equal(source, "/hotspot-guard/appcast/*");
+  assert.equal(target, "/hotspot-guard/appcast.json");
+  assert.equal(status, "200", "必须是 200 rewrite，不能是 30x redirect");
+});
+
+test("🚨 客户端拼出的版本化路径必须落在 rewrite 的匹配范围里", () => {
+  // 复刻客户端 UpdateChecker.manifestURL(currentVersion:) 的产物形态。
+  // 两边不匹配的表现是：新客户端更新检查 404，且服务端没有任何报错。
+  const clientPath = "/hotspot-guard/appcast/1.0.13.json";
+  assert.ok(clientPath.startsWith("/hotspot-guard/appcast/"),
+    "客户端路径必须命中 /hotspot-guard/appcast/* 通配");
+  assert.match(clientPath, /^\/hotspot-guard\/appcast\/\d+(\.\d+){0,3}\.json$/);
+});
+
+test("🚨 版本化路径的响应头必须与扁平路径一致（短缓存 + JSON）", () => {
+  // _headers 是按请求 URL 匹配的：rewrite 不会继承目标路径的响应头，
+  // 漏配的表现是版本化路径拿默认长缓存，发新版后新客户端最晚数小时
+  // 才能看到——而扁平路径的老客户端 5 分钟就看到了，行为分裂最难排查。
+  const headers = readFileSync(
+    fileURLToPath(new URL("../_headers", import.meta.url)),
+    "utf8",
+  );
+  const blocks = headers.split(/\n(?=\S)/);
+  const flat = blocks.find((b) => b.startsWith("/hotspot-guard/appcast.json"));
+  const versioned = blocks.find((b) => b.startsWith("/hotspot-guard/appcast/*"));
+  assert.ok(flat, "扁平路径的 _headers 块必须保留——≤1.0.12 客户端还在用");
+  assert.ok(versioned, "_headers 里必须有 /hotspot-guard/appcast/* 块");
+  const rules = (block) => block.trim().split("\n").slice(1)
+    .map((row) => row.trim()).filter(Boolean).sort();
+  assert.deepEqual(rules(versioned), rules(flat),
+    "两条路径的响应头必须逐条一致，避免缓存行为分裂");
+});
+
 test("🚨 appcast 的版本不得高于 _redirects 里 302 别名实际指向的包", () => {
   // 两者不一致时的表现是：客户端说"有 1.0.12"，点下载却拿到 1.0.11 的包，
   // 用户会认为更新功能坏了。发版必须同时改这两个文件。
