@@ -3,7 +3,7 @@
 /receiptclaim/* https://receiptclaim.tinyneed.com/:splat 301
 # Stable download alias for directory listings (MacUpdate etc.).
 # 302 on purpose: target moves every release; 301 would be cached forever.
-/hotspot-guard/download /hotspot-guard/assets/HotspotGuard-Pro-1.0.14.zip 302
+/hotspot-guard/download /hotspot-guard/assets/HotspotGuard-Pro-1.1.0.zip 302
 # 带版本号的更新清单路径（1.0.14+ 客户端）：200 rewrite 回同一份 appcast.json。
 # 版本进 path 是为了在 CF free plan 边缘日志里拿到活跃机器的版本分布
 # （free plan 没有完整 UA / query / referer，path 是唯一可用维度）。
