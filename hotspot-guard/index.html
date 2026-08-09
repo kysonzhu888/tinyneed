@@ -57,12 +57,16 @@
 
       <section class="hg-get">
         <div class="hg-get-main">
-          <a class="hg-btn" href="/hotspot-guard/assets/HotspotGuard-Pro-1.0.13.zip">
+          <a class="hg-btn" href="/hotspot-guard/assets/HotspotGuard-Pro-1.0.14.zip">
             Download for macOS
           </a>
           <p class="hg-meta">
-            Version 1.0.13 &middot; 948 KB &middot; macOS 14 or later (Apple silicon)<br>
+            Version 1.0.14 &middot; 949 KB &middot; macOS 14 or later (Apple silicon)<br>
             Signed with a Developer ID and notarized by Apple &mdash; opens without warnings.<br>
+            1.0.14 puts the app version into the address the opt-in update check calls,
+            so a release with a defect can be spotted from the server side even when
+            nobody writes in. The request still carries only the app version and your
+            macOS version &mdash; the same two facts as before, in one more place.<br>
             1.0.13 stops the guard from wasting data on apps that come straight back after
             being stopped. System updaters restart automatically and begin their download
             over, so stopping them again and again cost more data than it saved &mdash;
