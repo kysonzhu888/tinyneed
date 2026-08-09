@@ -53,15 +53,21 @@ test("builds real 404 pages for the TinyNeed and ReceiptClaim deployments", asyn
   );
 });
 
-test("states the current ReceiptClaim platform availability without dead store links", async () => {
+test("offers the live App Store entry through /get, with a QR code", async () => {
   execFileSync(process.execPath, ["tools/build.mjs"], { cwd: root, stdio: "pipe" });
 
   for (const relativePath of ["receiptclaim/index.html", ".deploy-receiptclaim/index.html"]) {
     const homepage = await readFile(path.join(root, relativePath), "utf8");
-    assert.match(homepage, /iOS: Preparing for App Review/, relativePath);
+    assert.match(homepage, /iOS: Now on the App Store/, relativePath);
     assert.match(homepage, /Android: Not yet available on Google Play/, relativePath);
+    assert.match(homepage, /href="\/get"/, relativePath);
+    assert.match(homepage, /assets\/appstore-qr\.svg/, relativePath);
+    assert.doesNotMatch(homepage, /Preparing for App Review/, relativePath);
+    // The store URL lives only in _redirects (/get); the homepage never
+    // hardcodes it, so a store-page move is a one-line redirect change.
     assert.doesNotMatch(homepage, /apps\.apple\.com|play\.google\.com/, relativePath);
   }
+  assert.equal(existsSync(path.join(root, ".deploy-receiptclaim/assets/appstore-qr.svg")), true);
 });
 
 test("distinguishes app privacy from website analytics", async () => {

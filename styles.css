@@ -706,6 +706,28 @@ button,
   margin-top: 6px;
 }
 
+.receiptclaim-store-link {
+  background: #fff;
+  border-radius: 10px;
+  color: var(--receipt-navy);
+  display: inline-flex;
+  font-weight: 800;
+  justify-content: center;
+  margin-top: 18px;
+  padding: 13px 18px;
+  text-decoration: none;
+}
+
+/* Beats the panel-wide img rule (70% width, 22% radius) — a QR needs its
+   exact pixel grid and a white quiet zone to stay scannable on the navy. */
+.receiptclaim-brand-panel img.receiptclaim-qr {
+  background: #fff;
+  border-radius: 12px;
+  margin-top: 16px;
+  max-width: 132px;
+  width: 132px;
+}
+
 .receiptclaim-section,
 .receiptclaim-showcase,
 .receiptclaim-privacy-callout {
