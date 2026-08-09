@@ -57,12 +57,20 @@
 
       <section class="hg-get">
         <div class="hg-get-main">
-          <a class="hg-btn" href="/hotspot-guard/assets/HotspotGuard-Pro-1.0.12.zip">
+          <a class="hg-btn" href="/hotspot-guard/assets/HotspotGuard-Pro-1.0.13.zip">
             Download for macOS
           </a>
           <p class="hg-meta">
-            Version 1.0.12 &middot; 933 KB &middot; macOS 14 or later (Apple silicon)<br>
+            Version 1.0.13 &middot; 948 KB &middot; macOS 14 or later (Apple silicon)<br>
             Signed with a Developer ID and notarized by Apple &mdash; opens without warnings.<br>
+            1.0.13 stops the guard from wasting data on apps that come straight back after
+            being stopped. System updaters restart automatically and begin their download
+            over, so stopping them again and again cost more data than it saved &mdash;
+            measured live: one updater retried 21 times in a morning, losing about 20 MB
+            per round. Now the third strike within six hours freezes the app instead:
+            a frozen app is not restarted and keeps its download progress, so the transfer
+            finishes in a few paced steps. A notification shows what the retries cost,
+            with one-tap ways out.<br>
             1.0.12 adds an optional update check. It asks once, inside the menu panel,
             and does nothing until you say yes. If you allow it, once a day the app asks
             this site whether a newer version exists, sending only the app version and
