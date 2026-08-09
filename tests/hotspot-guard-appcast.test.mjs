@@ -76,7 +76,7 @@ test("🚨 appcast.json 与 _headers 都必须在 build allowlist 里", () => {
 });
 
 test("🚨 版本化清单路径必须有 200 rewrite 回同一份 appcast.json", () => {
-  // 1.0.13+ 客户端请求 /hotspot-guard/appcast/<version>.json——版本进 path
+  // 1.0.14+ 客户端请求 /hotspot-guard/appcast/<version>.json——版本进 path
   // 是 CF free plan 下拿到版本分布的唯一办法（边缘日志没有完整 UA）。
   // rewrite 必须是 200 而不是 302：302 会让同一次 check-in 在日志里
   // 变成两条请求，且多一跳网络往返。
@@ -114,7 +114,7 @@ test("🚨 版本化路径的响应头必须与扁平路径一致（短缓存 + 
   const blocks = headers.split(/\n(?=\S)/);
   const flat = blocks.find((b) => b.startsWith("/hotspot-guard/appcast.json"));
   const versioned = blocks.find((b) => b.startsWith("/hotspot-guard/appcast/*"));
-  assert.ok(flat, "扁平路径的 _headers 块必须保留——≤1.0.12 客户端还在用");
+  assert.ok(flat, "扁平路径的 _headers 块必须保留——≤1.0.13 客户端还在用");
   assert.ok(versioned, "_headers 里必须有 /hotspot-guard/appcast/* 块");
   const rules = (block) => block.trim().split("\n").slice(1)
     .map((row) => row.trim()).filter(Boolean).sort();
