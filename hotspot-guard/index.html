@@ -34,6 +34,9 @@
       .hg-card p { margin: 0; color: #3f4a55; font-size: .93rem; line-height: 1.6; }
       .hg-note { border-left: 3px solid #d8dde7; padding-left: 14px; color: #5b6470;
                  font-size: .9rem; line-height: 1.7; margin-top: 32px; }
+      /* 根站 .footer 是不换行的 flex，那里只有三项；这里有五项，
+         390px 宽会溢出屏幕，所以本页放开换行。 */
+      .footer { flex-wrap: wrap; gap: 10px 18px; padding: 18px 20px; }
     </style>
   </head>
   <body>
@@ -63,7 +66,7 @@
           <p class="hg-meta">
             Version 1.2.0 &middot; 1.1 MB &middot; macOS 14 or later (Apple silicon)<br>
             Signed with a Developer ID and notarized by Apple &mdash; opens without warnings.<br>
-            1.2.0 adds plan profiles: keep a separate monthly ledger for each connection you use &mdash; a home phone’s 30 GB and a travel eSIM’s 5 GB are different budgets, and the guard remembers which profile belongs to which connection. One profile stays free forever; multiple profiles will be part of a paid Plus unlock that is not on sale yet.<br>
+            1.2.0 adds plan profiles: keep a separate monthly ledger for each connection you use &mdash; a home phone’s 30 GB and a travel eSIM’s 5 GB are different budgets, and the guard remembers which profile belongs to which connection. One profile stays free forever; multiple profiles are the paid Plus unlock described below.<br>
             1.1.1 adds an optional online lookup for apps the built-in pack does not know. It is off until you allow it, sends only the one process name you click Explain on &mdash; never automatically &mdash; and answers are cached on your Mac.<br>
             1.1.0 explains what you are looking at. Click any app in the panel and it tells
             you what that process is, why it uses data, and whether limiting it is safe
@@ -102,9 +105,10 @@
             The guard itself is <strong>free, forever</strong> — everything above, no time limit.<br>
             <strong>Hotspot Guard Plus</strong> ($24.99, one-time) adds plan profiles: separate
             monthly ledgers for each connection you juggle, with one-click switching.
-            Purchases open
-            shortly &mdash; when they do, your license key arrives by email and activates in
-            Settings &rarr; About (works on up to 3 Macs).
+            <a href="https://www.creem.io/payment/prod_4ShjWH61KJYiHl0vRYcRHO">Get Plus</a>
+            &mdash; your license key arrives by email; activate it in Settings &rarr; About
+            (works on up to 3 Macs). See the
+            <a href="/hotspot-guard/terms/">terms of sale</a> before buying.
           </p>
         </div>
         <figure class="hg-qr">
@@ -148,10 +152,22 @@
       </section>
 
       <p class="hg-note">
-        Hotspot Guard runs entirely on your Mac. It has no account, sends no telemetry,
-        and does not use the network at all while you are on a hotspot. Everything it
-        measures stays on your machine.
+        Hotspot Guard runs entirely on your Mac. It has no account and no usage telemetry:
+        what it measures &mdash; per-app traffic, budgets, the knowledge pack, and the record
+        of what it did &mdash; never leaves your machine. It reaches the network in only three
+        places, and two of them are off until you say yes: the once-a-day update check
+        (app version and macOS version only) and the click-to-explain lookup for an unknown
+        process. The third applies only if you buy Plus, which checks your license key.
+        The <a href="/hotspot-guard/privacy/">privacy policy</a> spells out each one.
       </p>
     </main>
+
+    <footer class="footer">
+      <span>TinyNeed</span>
+      <a href="/hotspot-guard/privacy/">Privacy</a>
+      <a href="/hotspot-guard/terms/">Terms</a>
+      <a href="mailto:hello@tinyneed.com?subject=Hotspot%20Guard%20support">hello@tinyneed.com</a>
+      <a href="/">More tools</a>
+    </footer>
   </body>
 </html>
