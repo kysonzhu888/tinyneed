@@ -105,6 +105,30 @@ test("distinguishes app privacy from website analytics", async () => {
   }
 });
 
+/// The pre-2.0 pitch was "we never upload your receipt". Cloud recognition is
+/// now the default path (gated behind an explicit, remembered consent), so
+/// that sentence turned into a false claim the moment 1.2.1 went
+/// READY_FOR_SALE. The site and the approved App Store description have to
+/// tell the same story, so the retired phrasing is banned by name rather than
+/// left to whoever edits the hero next.
+test("does not claim the app avoids cloud upload", async () => {
+  execFileSync(process.execPath, ["tools/build.mjs"], { cwd: root, stdio: "pipe" });
+
+  for (const relativePath of ["receiptclaim/index.html", ".deploy-receiptclaim/index.html"]) {
+    const homepage = await readFile(path.join(root, relativePath), "utf8");
+    assert.doesNotMatch(homepage, /cloud upload|cloud receipt upload/i, relativePath);
+    assert.doesNotMatch(homepage, /Local-first privacy/i, relativePath);
+    // Silence about the cloud path would be just as misleading as the old
+    // claim, so the consent gate and the free on-device fallback are pinned.
+    assert.match(homepage, /only after you explicitly agree/i, relativePath);
+    assert.match(
+      homepage,
+      /on-device recognition stays fully available, free, and unlimited/i,
+      relativePath,
+    );
+  }
+});
+
 test("injects Cloudflare Web Analytics exactly once into every ReceiptClaim HTML document", async () => {
   execFileSync(process.execPath, ["tools/build.mjs"], { cwd: root, stdio: "pipe" });
 
