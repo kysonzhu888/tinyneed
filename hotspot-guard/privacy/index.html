@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hotspot Guard Privacy Policy</title>
+    <meta name="description" content="Privacy policy for the Hotspot Guard macOS app, including the optional update check, the optional online explanation lookup, and Plus license checks.">
+    <link rel="canonical" href="https://tinyneed.com/hotspot-guard/privacy/">
+    <link rel="stylesheet" href="/styles.css?v=hotspot-20260726-1">
+  </head>
+  <body>
+    <main class="simple-page legal-page">
+      <a class="back-link" href="/hotspot-guard/">Back to Hotspot Guard</a>
+      <h1>Hotspot Guard Privacy Policy</h1>
+      <p><strong>Effective date:</strong> August 10, 2026</p>
+      <p>Hotspot Guard is a macOS menu bar app published by TinyNeed. It creates no account, shows no ads, tracks no location, and sells no personal data. This page describes every case in which the app sends anything off your Mac, and what that data is.</p>
+
+      <h2>What stays on your Mac</h2>
+      <p>The work the app exists to do is entirely local. Per-app traffic measurement, your monthly budget and its forecast, the rules you set, the built-in knowledge pack of 149 common apps and daemons, the record of what the guard did and why, and any explanation the app has already looked up are read and written on your machine only. None of it is uploaded, and there is no server-side copy of it to request or delete.</p>
+
+      <h2>The update check (optional, off by default)</h2>
+      <p>The app asks once, inside the menu panel, whether it may check for updates. It sends nothing until you say yes, and saying no means it never connects for this purpose.</p>
+      <p>If you allow it, then at most once every 24 hours the app requests an update manifest from this website. That request carries the app version, which is part of the address requested, and your macOS version, which is sent in the standard <code>User-Agent</code> header. It carries no account, no identifier we assign, no app names, and no usage data.</p>
+      <p>This check is not suppressed while you are on a hotspot. The request and its response are a few hundred bytes.</p>
+
+      <h2>Explaining an unknown process (optional, off by default, click only)</h2>
+      <p>When the built-in knowledge pack does not recognise a process, the app can look it up online. This is a separate permission from the update check, granted separately, and it never runs on its own: it runs only for the one process whose <em>Explain online</em> button you click.</p>
+      <p>What is sent is the process name alone — for example <code>com.apple.photoanalysisd</code> — over an encrypted connection to the Hotspot Guard lookup service, which asks a large language model through the routing provider OpenRouter and returns a short description. No traffic figures, no other process names, no file paths, and no identifier accompany it.</p>
+      <p>The service caches answers by process name so a name is looked up once rather than once per user, and the answer is also cached on your Mac so the same name is never sent twice from your machine. Its request logs record the outcome of a request and whether it was served from cache; the process name and the network address are deliberately not written to a single joined log record.</p>
+
+      <h2>Hotspot Guard Plus licensing</h2>
+      <p>This section applies only if you buy Plus. Activating a license sends your license key and a device label of the form <code>Hotspot Guard on &lt;your computer name&gt;</code> — the name macOS already uses for your Mac — so that you can recognise and release your own activations against the three-Mac limit. The service returns an activation identifier, which the app stores locally and sends back when it revalidates the license roughly every 14 days, and when you deactivate a Mac.</p>
+      <p>The revalidation call carries the license key and that activation identifier, and nothing about how you use the app.</p>
+
+      <h2>Buying Plus</h2>
+      <p>Purchases are processed by Creem (Armitage Labs OÜ) as merchant of record. Creem collects your email address, payment details, and any billing or tax information the sale requires, and handles them under its own privacy policy; your card details are never sent to us and we never see them. What reaches us is the resulting license record. Your license key is delivered to the email address you give at checkout.</p>
+
+      <h2>This website</h2>
+      <p>These pages are hosted and served by Cloudflare. They carry no analytics script, no advertising, and no cookies of ours. What does exist is what any web server sees: Cloudflare's edge logs the requests it serves, including the network address they came from. The same is true of the app's update check, because it is an ordinary web request to this site — so neither this site nor that check is fully anonymous, and we do not claim otherwise. Cloudflare processes that data under its <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a>. Other TinyNeed tools, some of which do carry advertising, are covered by the <a href="/privacy/">site privacy policy</a>.</p>
+
+      <h2>Children</h2>
+      <p>Hotspot Guard is a general utility and is not directed to children under 13. We do not knowingly collect children's personal information.</p>
+
+      <h2>Changes</h2>
+      <p>If the app's data practices change, this page and its effective date are updated before the new practice ships, and any new outbound connection is added to the list above.</p>
+
+      <h2>Contact</h2>
+      <p>Questions or privacy requests: <a href="mailto:hello@tinyneed.com?subject=Hotspot%20Guard%20privacy">hello@tinyneed.com</a>. We reply within three business days.</p>
+    </main>
+
+    <footer class="footer">
+      <span>TinyNeed</span>
+      <a href="/hotspot-guard/">Hotspot Guard</a>
+      <a href="/hotspot-guard/terms/">Terms</a>
+      <a href="mailto:hello@tinyneed.com?subject=Hotspot%20Guard%20support">hello@tinyneed.com</a>
+    </footer>
+  </body>
+</html>
