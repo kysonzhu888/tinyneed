@@ -26,6 +26,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tinyneed.com/hotspot-guard/changelog/</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://tinyneed.com/hotspot-guard/privacy/</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://tinyneed.com/hotspot-guard/terms/</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://receiptclaim.tinyneed.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

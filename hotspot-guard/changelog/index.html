@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hotspot Guard Release History</title>
+    <meta name="description" content="Every released version of the Hotspot Guard macOS app, what changed, and which builds were withdrawn and why.">
+    <link rel="canonical" href="https://tinyneed.com/hotspot-guard/changelog/">
+    <link rel="stylesheet" href="/styles.css?v=hotspot-20260726-1">
+  </head>
+  <body>
+    <main class="simple-page legal-page">
+      <a class="back-link" href="/hotspot-guard/">Back to Hotspot Guard</a>
+      <h1>Hotspot Guard Release History</h1>
+      <p>Every release since the app went public, newest first. Versions that were pulled are listed with the reason they were pulled &mdash; ten builds have been withdrawn for real defects, and hiding that would not make the app better.</p>
+
+      <h2>1.2.0</h2>
+      <p>Adds plan profiles: keep a separate monthly ledger for each connection you use &mdash; a home phone&rsquo;s 30 GB and a travel eSIM&rsquo;s 5 GB are different budgets, and the guard remembers which profile belongs to which connection. One profile stays free forever; multiple profiles are the paid <a href="/hotspot-guard/">Plus unlock</a>.</p>
+
+      <h2>1.1.1</h2>
+      <p>Adds an optional online lookup for apps the built-in pack does not know. It is off until you allow it, sends only the one process name you click Explain on &mdash; never automatically &mdash; and answers are cached on your Mac.</p>
+
+      <h2>1.1.0</h2>
+      <p>Explains what you are looking at. Click any app in the panel and it tells you what that process is, why it uses data, and whether limiting it is safe &mdash; from a built-in knowledge pack covering 149 common apps and system daemons, so it works fully offline. A new per-app detail view also shows exactly what the guard did and why: how often it stepped in, what those retries cost, and which rule fired. Entries written by AI and not yet human-reviewed say so on the label.</p>
+
+      <h2>1.0.14</h2>
+      <p>Puts the app version into the address the opt-in update check calls, so a release with a defect can be spotted from the server side even when nobody writes in. The request still carries only the app version and your macOS version &mdash; the same two facts as before, in one more place.</p>
+
+      <h2>1.0.13</h2>
+      <p>Stops the guard from wasting data on apps that come straight back after being stopped. System updaters restart automatically and begin their download over, so stopping them again and again cost more data than it saved &mdash; measured live: one updater retried 21 times in a morning, losing about 20 MB per round. Now the third strike within six hours freezes the app instead: a frozen app is not restarted and keeps its download progress, so the transfer finishes in a few paced steps. A notification shows what the retries cost, with one-tap ways out.</p>
+
+      <h2>1.0.12</h2>
+      <p>Adds an optional update check. It asks once, inside the menu panel, and does nothing until you say yes. If you allow it, once a day the app asks this site whether a newer version exists, sending only the app version and your macOS version &mdash; no account, no usage data, no app names. Say no and it never connects. This exists because there was previously no way to tell you a fix had shipped, and ten builds have been pulled for real defects. 1.0.12 also fixes the tether hint coming back after every relaunch once dismissed.</p>
+
+      <h2>1.0.11</h2>
+      <p>Actually fixes per-app measurement. 1.0.10 was released claiming to fix it and did not: on a phone hotspot the list still read &ldquo;No traffic yet&rdquo; while data was being used, even though the monthly total kept climbing. Each sample was doing a name lookup that stalled on hotspot DNS and got cut off before it returned any data. A sample round now takes about 0.3 seconds instead of five.</p>
+
+      <h2>1.0.8</h2>
+      <p>Stopped the menu bar icon from showing full Wi-Fi while you are offline, and tells you when your iPhone is plugged in but macOS is still sending traffic over Wi-Fi.</p>
+
+      <h2>Withdrawn builds</h2>
+      <p>1.0 through 1.0.10 are no longer offered. Each was pulled for a defect that made the app either wrong or unusable rather than merely imperfect: missing session protection, per-app totals that read systematically low, breaches of protected apps going unrecorded, notification buttons performing the global action instead of their own label, a missing daily budget, a re-derive button silently overwriting hand-tuned thresholds, the settings window opening behind the panel, a full-strength Wi-Fi icon while offline, external commands with no timeout, and per-app statistics that were empty all day while the interface said &ldquo;No traffic yet&rdquo;.</p>
+
+      <h2>Updating</h2>
+      <p>The app can check this site once a day for a newer version, but only if you allow it in the menu panel; it never connects otherwise. You can always download the current build from the <a href="/hotspot-guard/">product page</a>. See the <a href="/hotspot-guard/privacy/">privacy policy</a> for exactly what an update check sends.</p>
+    </main>
+
+    <!-- 页脚保持 4 项与 privacy/terms 一致：全局 .footer 是不换行的 flex，
+         第 5 项会在 390px 撑破屏幕（落地页正因此加了 flex-wrap 覆盖）。
+         Terms 从正文和落地页都可达，不必挤进这里。 -->
+    <footer class="footer">
+      <span>TinyNeed</span>
+      <a href="/hotspot-guard/">Hotspot Guard</a>
+      <a href="/hotspot-guard/privacy/">Privacy</a>
+      <!--email_off--><a href="mailto:hello@tinyneed.com?subject=Hotspot%20Guard%20support">hello@tinyneed.com</a><!--/email_off-->
+    </footer>
+  </body>
+</html>

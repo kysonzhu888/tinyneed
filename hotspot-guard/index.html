@@ -32,6 +32,16 @@
       .hg-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
       .hg-card h3 { margin: 0 0 6px; font-size: 1rem; }
       .hg-card p { margin: 0; color: #3f4a55; font-size: .93rem; line-height: 1.6; }
+      /* 购买区自成一块：此前它只是 hg-meta 长文末尾的一句话，读起来不像可买的东西。
+         底色和左边框比 .hg-get 略强一档，让它在同屏里是第二个明确的动作。 */
+      .hg-plus { padding: 22px 24px; border: 1px solid #d3dbe8; border-left: 4px solid #31456a;
+                 border-radius: 14px; background: #f4f7fc; margin-bottom: 32px; }
+      .hg-plus-free { margin: 0 0 14px; color: #3f4a55; font-size: .93rem; line-height: 1.6; }
+      .hg-plus-title { margin: 0 0 6px; font-size: 1.05rem; }
+      .hg-plus-title span { font-weight: 500; color: #5b6470; }
+      .hg-plus-pitch { margin: 0 0 16px; color: #3f4a55; font-size: .93rem; line-height: 1.6; }
+      .hg-plus p:has(> .hg-btn-plus) { margin: 0 0 12px; }
+      .hg-plus-fine { margin: 0; font-size: .85rem; color: #5b6470; line-height: 1.7; }
       .hg-note { border-left: 3px solid #d8dde7; padding-left: 14px; color: #5b6470;
                  font-size: .9rem; line-height: 1.7; margin-top: 32px; }
       /* 根站 .footer 是不换行的 flex，那里只有三项；这里有五项，
@@ -66,49 +76,10 @@
           <p class="hg-meta">
             Version 1.2.0 &middot; 1.1 MB &middot; macOS 14 or later (Apple silicon)<br>
             Signed with a Developer ID and notarized by Apple &mdash; opens without warnings.<br>
-            1.2.0 adds plan profiles: keep a separate monthly ledger for each connection you use &mdash; a home phone’s 30 GB and a travel eSIM’s 5 GB are different budgets, and the guard remembers which profile belongs to which connection. One profile stays free forever; multiple profiles are the paid Plus unlock described below.<br>
-            1.1.1 adds an optional online lookup for apps the built-in pack does not know. It is off until you allow it, sends only the one process name you click Explain on &mdash; never automatically &mdash; and answers are cached on your Mac.<br>
-            1.1.0 explains what you are looking at. Click any app in the panel and it tells
-            you what that process is, why it uses data, and whether limiting it is safe
-            &mdash; from a built-in knowledge pack covering 149 common apps and system
-            daemons, so it works fully offline. A new per-app detail view also shows
-            exactly what the guard did and why: how often it stepped in, what those
-            retries cost, and which rule fired. Entries written by AI and not yet
-            human-reviewed say so on the label.<br>
-            1.0.14 puts the app version into the address the opt-in update check calls,
-            so a release with a defect can be spotted from the server side even when
-            nobody writes in. The request still carries only the app version and your
-            macOS version &mdash; the same two facts as before, in one more place.<br>
-            1.0.13 stops the guard from wasting data on apps that come straight back after
-            being stopped. System updaters restart automatically and begin their download
-            over, so stopping them again and again cost more data than it saved &mdash;
-            measured live: one updater retried 21 times in a morning, losing about 20 MB
-            per round. Now the third strike within six hours freezes the app instead:
-            a frozen app is not restarted and keeps its download progress, so the transfer
-            finishes in a few paced steps. A notification shows what the retries cost,
-            with one-tap ways out.<br>
-            1.0.12 adds an optional update check. It asks once, inside the menu panel,
-            and does nothing until you say yes. If you allow it, once a day the app asks
-            this site whether a newer version exists, sending only the app version and
-            your macOS version &mdash; no account, no usage data, no app names. Say no and
-            it never connects. This exists because there was previously no way to tell you
-            a fix had shipped, and ten builds have been pulled for real defects. 1.0.12
-            also fixes the tether hint coming back after every relaunch once dismissed.<br>
-            1.0.11 actually fixes per-app measurement. 1.0.10 was released claiming to fix it
-            and did not: on a phone hotspot the list still read &ldquo;No traffic yet&rdquo;
-            while data was being used, even though the monthly total kept climbing. Each
-            sample was doing a name lookup that stalled on hotspot DNS and got cut off before
-            it returned any data. A sample round now takes about 0.3 seconds instead of five.
-            1.0.8 stopped the menu bar icon from showing full Wi-Fi while you are offline, and
-            tells you when your iPhone is plugged in but macOS is still sending traffic over
-            Wi-Fi.<br>
-            The guard itself is <strong>free, forever</strong> — everything above, no time limit.<br>
-            <strong>Hotspot Guard Plus</strong> ($24.99, one-time) adds plan profiles: separate
-            monthly ledgers for each connection you juggle, with one-click switching.
-            <a href="https://www.creem.io/payment/prod_4ShjWH61KJYiHl0vRYcRHO">Get Plus</a>
-            &mdash; your license key arrives by email; activate it in Settings &rarr; About
-            (works on up to 3 Macs). See the
-            <a href="/hotspot-guard/terms/">terms of sale</a> before buying.
+            New in 1.2.0: plan profiles &mdash; a separate monthly ledger for each connection
+            you use, because a home phone&rsquo;s 30 GB and a travel eSIM&rsquo;s 5 GB are
+            different budgets.
+            <a href="/hotspot-guard/changelog/">Full release history &rarr;</a>
           </p>
         </div>
         <figure class="hg-qr">
@@ -116,6 +87,28 @@
                width="132" height="132">
           <figcaption>Scan to open this page</figcaption>
         </figure>
+      </section>
+
+      <section class="hg-plus">
+        <p class="hg-plus-free">
+          The guard itself is <strong>free, forever</strong> &mdash; everything on this page,
+          no time limit and no account.
+        </p>
+        <h2 class="hg-plus-title">Hotspot Guard Plus <span>&middot; $24.99 one-time</span></h2>
+        <p class="hg-plus-pitch">
+          Adds plan profiles: separate monthly ledgers for each connection you juggle,
+          with one-click switching. Future Plus features are included.
+        </p>
+        <p>
+          <a class="hg-btn hg-btn-plus" href="https://www.creem.io/payment/prod_4ShjWH61KJYiHl0vRYcRHO">
+            Get Plus
+          </a>
+        </p>
+        <p class="hg-plus-fine">
+          Your license key arrives by email; activate it in Settings &rarr; About
+          (works on up to 3 Macs). See the
+          <a href="/hotspot-guard/terms/">terms of sale</a> before buying.
+        </p>
       </section>
 
       <section class="hg-grid">
