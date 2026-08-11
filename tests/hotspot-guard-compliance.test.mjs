@@ -28,6 +28,20 @@ test("the Hotspot Guard page offers a reachable purchase path", () => {
   );
 });
 
+test("the in-app checkout alias resolves to the same Creem product", async () => {
+  const redirects = await readFile(new URL("../_redirects", import.meta.url), "utf8");
+  const alias = redirects
+    .split("\n")
+    .find((line) => line.startsWith("/hotspot-guard/buy "));
+  // The macOS app hardcodes /hotspot-guard/buy. Drop this line and every
+  // installed copy's "Get Plus" button 404s, with no way to fix it remotely.
+  assert.ok(alias, "the /hotspot-guard/buy alias is missing; the app's buy button links here");
+  assert.ok(
+    alias.includes(CHECKOUT_URL),
+    "the buy alias points somewhere other than the pinned Creem product",
+  );
+});
+
 test("the Hotspot Guard page links its policies and a support address", () => {
   for (const link of [
     'href="/hotspot-guard/privacy/"',
