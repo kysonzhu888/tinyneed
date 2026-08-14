@@ -141,3 +141,32 @@ test("🚨 appcast 的版本不得高于 _redirects 里 302 别名实际指向�
     `appcast 写 ${appcast.latestVersion}，但 302 别名指向 ${zipVersion} 的包`,
   );
 });
+
+// ── 落地页的下载入口 ──────────────────────────────────────────────
+//
+// 🚨 2026-08-14 实测事故：1.4.0 发布后，appcast 和 302 别名都指向新包，
+// 但落地页的按钮是**写死的** `HotspotGuard-Pro-1.3.1.zip`，
+// 于是所有从官网点按钮的真实用户拿到的仍是旧版。
+//
+// 讽刺的是上面那条「下载地址指向稳定别名而不是某个具体版本的 zip」
+// 早就存在——**规则写下来了，只是只套在 appcast 上，没套到页面上**。
+// 发版检查清单当时也只写了「_redirects 与 appcast 必须同 commit 移动」，
+// 漏掉了第三个地方。所以这里把同一条规则补到用户真正会点的那个入口上。
+
+const landingPage = readFileSync(
+  new URL("../hotspot-guard/index.html", import.meta.url), "utf8");
+
+test("🚨 落地页的下载按钮必须走稳定别名，绝不能写死某个版本的 zip", () => {
+  assert.doesNotMatch(landingPage, /HotspotGuard-Pro-[\d.]+\.zip/,
+    "落地页写死了版本化的 zip 路径——发版时它不会自动跟着走，"
+    + "真实用户点按钮会拿到旧版");
+  assert.match(landingPage, /href="\/hotspot-guard\/download"/,
+    "落地页必须用 /hotspot-guard/download 这个 302 别名");
+});
+
+test("🚨 落地页标注的版本号必须和 appcast 一致，否则页面在说谎", () => {
+  const shown = landingPage.match(/Version ([\d.]+) &middot;/);
+  assert.ok(shown, "落地页应当标注版本号");
+  assert.equal(shown[1], appcast.latestVersion,
+    `页面写 ${shown?.[1]}，appcast 写 ${appcast.latestVersion}——两者必须同 commit 移动`);
+});
