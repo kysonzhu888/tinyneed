@@ -18,3 +18,16 @@
 # 200 而不是 302：302 会让同一次 check-in 在日志里变成两条请求。
 # 扁平路径 /hotspot-guard/appcast.json 必须永远保留给 ≤1.0.13 客户端。
 /hotspot-guard/appcast/* /hotspot-guard/appcast.json 200
+# 社媒渠道归因别名（social-ops skill Step 4）。路径读作「来自 X」而不是「去往 X」：
+# 用 /from/ 不用 /go/ —— 产品所有者本人把 /go/x/ 读成了「跳转到 X」，
+# 一个被稳定误读的命名要改的是命名本身，不是再补一段解释。所有对外发布的链接都走这里，
+# 不直贴落地页——否则那次分发在边缘日志里完全不可区分。
+# CF free plan 没有 referer / query / 完整 UA，path 是唯一可测维度，
+# 和上面的版本进 path 是同一招。UTM 挂在 302 目标上只为将来接 GA4，
+# 当前不作为计数依据（free plan 读不到 query）。
+# 302 而非 301：渠道会停、目标会换，301 会被永久缓存在读者浏览器里。
+# 按产品分而不按日期分：free plan 的 detail 只能查 1 天窗口，日期维度由
+# 查询本身提供，按日期建别名只会把命中散成一堆稀疏路径。
+/from/x/hotspot-guard /hotspot-guard/?utm_source=x&utm_medium=organic_social&utm_campaign=hsg_build_in_public_202608 302
+/from/x/receiptclaim https://receiptclaim.tinyneed.com/?utm_source=x&utm_medium=organic_social&utm_campaign=rc_build_in_public_202608 302
+/from/reddit/hotspot-guard /hotspot-guard/?utm_source=reddit&utm_medium=community&utm_campaign=hsg_macapps_launch_202608 302
