@@ -129,6 +129,35 @@ test("does not claim the app avoids cloud upload", async () => {
   }
 });
 
+test("discloses retained cloud scans and both processing regions", async () => {
+  execFileSync(process.execPath, ["tools/build.mjs"], { cwd: root, stdio: "pipe" });
+
+  for (const relativePath of ["receiptclaim/index.html", ".deploy-receiptclaim/index.html"]) {
+    const homepage = await readFile(path.join(root, relativePath), "utf8");
+    assert.match(homepage, /receipt photo and recognition response are stored/i, relativePath);
+    assert.match(homepage, /Global.*Mainland China/i, relativePath);
+  }
+
+  for (const relativePath of [
+    "receiptclaim/privacy/index.html",
+    ".deploy-receiptclaim/privacy/index.html",
+  ]) {
+    const privacyPolicy = await readFile(path.join(root, relativePath), "utf8");
+    assert.doesNotMatch(
+      privacyPolicy,
+      /keeps no copy|no receipt content is stored|discarded when the response is returned|written to (?:no|neither) storage/i,
+      relativePath,
+    );
+    assert.match(privacyPolicy, /Cloudflare R2/, relativePath);
+    assert.match(privacyPolicy, /mainland China/i, relativePath);
+    assert.match(privacyPolicy, /Alibaba Cloud Model Studio/i, relativePath);
+    assert.match(privacyPolicy, /device ID/i, relativePath);
+    assert.match(privacyPolicy, /scan reference/i, relativePath);
+    assert.match(privacyPolicy, /no automatic expiry/i, relativePath);
+    assert.match(privacyPolicy, /request deletion/i, relativePath);
+  }
+});
+
 test("injects Cloudflare Web Analytics exactly once into every ReceiptClaim HTML document", async () => {
   execFileSync(process.execPath, ["tools/build.mjs"], { cwd: root, stdio: "pipe" });
 
