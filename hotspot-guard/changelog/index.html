@@ -14,6 +14,9 @@
       <h1>Hotspot Guard Release History</h1>
       <p>Every release since the app went public, newest first. Versions that were pulled are listed with the reason they were pulled &mdash; ten builds have been withdrawn for real defects, and hiding that would not make the app better.</p>
 
+      <h2>1.4.1</h2>
+      <p>Routes the two Plus purchase buttons through separate paths on TinyNeed before opening the same checkout. This lets us compare aggregate interest from the Plus tab with interest after someone reaches the Free profile limit. The paths contain no installation ID, device identifier, account, license key, or other user-level identifier, so they cannot reconstruct one person&rsquo;s journey.</p>
+
       <h2>1.4.0</h2>
       <p>Fixes a notification that could not answer either question it raised. When the guard asked about an app you had set to always block, &ldquo;Show details&rdquo; opened whichever settings page you happened to look at last &mdash; usually one with nothing to do with that app &mdash; and none of the buttons could stop the question coming back. Show details now opens that app&rsquo;s own page, which lists how many times you were asked and why. &ldquo;Allow once&rdquo; became &ldquo;Allow until done&rdquo;: it now waits for the transfer to actually finish instead of expiring after two minutes, so one press covers a whole SDK download. A new &ldquo;Stop asking today&rdquo; silences an app until tomorrow without changing its policy. Ask about the same app a fourth time within an hour and the notification says so, and leads with the choices that end the loop. The Rules page now states what &ldquo;step in automatically&rdquo; plus &ldquo;force quit&rdquo; means together: the app is killed with no chance to save.</p>
 

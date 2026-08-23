@@ -9,9 +9,15 @@
 # 302 for the same reason as the download alias, plus the path hit is the
 # only in-app conversion metric CF's free plan can give us.
 /hotspot-guard/buy https://www.creem.io/payment/prod_4ShjWH61KJYiHl0vRYcRHO 302
+# Privacy-first aggregate funnel. These aliases distinguish where purchase
+# intent happened without cookies, query parameters, installation IDs, or any
+# client-side analytics SDK. Keep the legacy alias above for shipped binaries.
+/hotspot-guard/buy/web https://www.creem.io/payment/prod_4ShjWH61KJYiHl0vRYcRHO 302
+/hotspot-guard/buy/app-plus https://www.creem.io/payment/prod_4ShjWH61KJYiHl0vRYcRHO 302
+/hotspot-guard/buy/app-limit https://www.creem.io/payment/prod_4ShjWH61KJYiHl0vRYcRHO 302
 # Stable download alias for directory listings (MacUpdate etc.).
 # 302 on purpose: target moves every release; 301 would be cached forever.
-/hotspot-guard/download /hotspot-guard/assets/HotspotGuard-Pro-1.4.0.zip 302
+/hotspot-guard/download /hotspot-guard/assets/HotspotGuard-Pro-1.4.1.zip 302
 # 带版本号的更新清单路径（1.0.14+ 客户端）：200 rewrite 回同一份 appcast.json。
 # 版本进 path 是为了在 CF free plan 边缘日志里拿到活跃机器的版本分布
 # （free plan 没有完整 UA / query / referer，path 是唯一可用维度）。

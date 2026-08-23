@@ -23,23 +23,24 @@ const CHECKOUT_URL = "https://www.creem.io/payment/prod_4ShjWH61KJYiHl0vRYcRHO";
 
 test("the Hotspot Guard page offers a reachable purchase path", () => {
   assert.ok(
-    page.includes(CHECKOUT_URL),
-    "the Plus checkout link is missing; Creem rejects a paid product with no live purchase path",
+    page.includes('href="/hotspot-guard/buy/web"'),
+    "the Plus checkout link must use the measurable first-party web alias",
   );
 });
 
-test("the in-app checkout alias resolves to the same Creem product", async () => {
+test("all source-specific checkout aliases resolve to the same Creem product", async () => {
   const redirects = await readFile(new URL("../_redirects", import.meta.url), "utf8");
-  const alias = redirects
-    .split("\n")
-    .find((line) => line.startsWith("/hotspot-guard/buy "));
-  // The macOS app hardcodes /hotspot-guard/buy. Drop this line and every
-  // installed copy's "Get Plus" button 404s, with no way to fix it remotely.
-  assert.ok(alias, "the /hotspot-guard/buy alias is missing; the app's buy button links here");
-  assert.ok(
-    alias.includes(CHECKOUT_URL),
-    "the buy alias points somewhere other than the pinned Creem product",
-  );
+  for (const path of [
+    "/hotspot-guard/buy",
+    "/hotspot-guard/buy/web",
+    "/hotspot-guard/buy/app-plus",
+    "/hotspot-guard/buy/app-limit",
+  ]) {
+    const alias = redirects.split("\n").find((line) => line.startsWith(`${path} `));
+    assert.ok(alias, `${path} alias is missing`);
+    assert.ok(alias.includes(CHECKOUT_URL), `${path} points at a different checkout`);
+    assert.match(alias, /\s302(?:\s|$)/, `${path} must stay a mutable 302`);
+  }
 });
 
 test("the Hotspot Guard page links its policies and a support address", () => {
@@ -71,5 +72,20 @@ test("the page does not advertise Plus as unavailable while it links a checkout"
       !page.includes(stale),
       `"${stale}" contradicts the live checkout link on the same page`,
     );
+  }
+});
+
+test("the privacy policy discloses the aggregate funnel and its hard exclusions", async () => {
+  const privacy = await readFile(
+    new URL("../hotspot-guard/privacy/index.html", import.meta.url),
+    "utf8",
+  );
+  for (const disclosure of [
+    "purchase source",
+    "event type, amount, currency, time, and result",
+    "does not store your email, name, customer ID",
+    "do not join these events into a user journey",
+  ]) {
+    assert.ok(privacy.includes(disclosure), `privacy policy is missing: ${disclosure}`);
   }
 });
