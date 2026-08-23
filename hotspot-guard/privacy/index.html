@@ -12,7 +12,7 @@
     <main class="simple-page legal-page">
       <a class="back-link" href="/hotspot-guard/">Back to Hotspot Guard</a>
       <h1>Hotspot Guard Privacy Policy</h1>
-      <p><strong>Effective date:</strong> August 10, 2026</p>
+      <p><strong>Effective date:</strong> August 23, 2026</p>
       <p>Hotspot Guard is a macOS menu bar app published by TinyNeed. It creates no account, shows no ads, tracks no location, and sells no personal data. This page describes every case in which the app sends anything off your Mac, and what that data is.</p>
 
       <h2>What stays on your Mac</h2>
@@ -31,9 +31,12 @@
       <h2>Hotspot Guard Plus licensing</h2>
       <p>This section applies only if you buy Plus. Activating a license sends your license key and a device label of the form <code>Hotspot Guard on &lt;your computer name&gt;</code> — the name macOS already uses for your Mac — so that you can recognise and release your own activations against the three-Mac limit. The service returns an activation identifier, which the app stores locally and sends back when it revalidates the license roughly every 14 days, and when you deactivate a Mac.</p>
       <p>The revalidation call carries the license key and that activation identifier, and nothing about how you use the app.</p>
+      <p>For an activation attempt, the service stores only the action type, a closed result category such as success or invalid, whether the store is in live or test mode, and the time. This aggregate event does not contain the license key, device label, activation identifier, network address, or a stable user or installation identifier. A failure to write this event never changes the activation result.</p>
 
       <h2>Buying Plus</h2>
       <p>Purchases are processed by Creem (Armitage Labs OÜ) as merchant of record. Creem collects your email address, payment details, and any billing or tax information the sale requires, and handles them under its own privacy policy; your card details are never sent to us and we never see them. What reaches us is the resulting license record. Your license key is delivered to the email address you give at checkout.</p>
+      <p>The Get Plus links first pass through a source-specific path on this website so we can count, in aggregate, whether the purchase source was the website, the App's Plus page, or the one-plan limit. These paths use no cookie, query parameter, installation ID, or client-side analytics script.</p>
+      <p>Creem also sends the service a signed notification for a completed checkout, refund, or dispute. Across the website's aggregate source counts and the service's event table, the retained funnel data is limited to purchase source counts plus the event type, amount, currency, time, and result. The service does not store your email, name, customer ID, billing address, payment details, or the original notification payload. We do not assign a stable identifier and do not join these events into a user journey.</p>
 
       <h2>This website</h2>
       <p>These pages are hosted and served by Cloudflare. They carry no analytics script, no advertising, and no cookies of ours. What does exist is what any web server sees: Cloudflare's edge logs the requests it serves, including the network address they came from. The same is true of the app's update check, because it is an ordinary web request to this site — so neither this site nor that check is fully anonymous, and we do not claim otherwise. Cloudflare processes that data under its <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a>. Other TinyNeed tools, some of which do carry advertising, are covered by the <a href="/privacy/">site privacy policy</a>.</p>
