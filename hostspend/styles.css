@@ -1,0 +1,243 @@
+.hostspend-shell {
+  max-width: 1120px;
+}
+
+.hostspend-page-tools,
+.hostspend-actions,
+.hostspend-meta,
+.hostspend-locale-switch {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hostspend-page-tools {
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.hostspend-page-tools .back-link {
+  margin-bottom: 0;
+}
+
+.hostspend-locale-switch {
+  background: #e8eeeb;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  gap: 3px;
+  padding: 3px;
+}
+
+.hostspend-locale-switch button {
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 8px 12px;
+}
+
+.hostspend-locale-switch button[aria-pressed="true"] {
+  background: var(--panel);
+  box-shadow: 0 2px 8px rgba(23, 33, 31, 0.12);
+  color: var(--ink);
+}
+
+.hostspend-hero {
+  align-items: center;
+  display: grid;
+  gap: 38px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  min-height: 590px;
+  padding: 36px 0 52px;
+}
+
+.hostspend-meta {
+  margin-bottom: 22px;
+}
+
+.hostspend-meta span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  padding: 7px 10px;
+}
+
+.hostspend-meta span:first-child {
+  background: var(--safe-bg);
+  border-color: #bce4d5;
+  color: var(--primary-strong);
+}
+
+.hostspend-copy h1 {
+  font-size: clamp(42px, 5.3vw, 72px);
+  max-width: 760px;
+}
+
+.hostspend-actions {
+  margin-top: 28px;
+}
+
+.hostspend-primary,
+.hostspend-secondary {
+  border-radius: 10px;
+  display: inline-flex;
+  font-weight: 850;
+  justify-content: center;
+  padding: 13px 17px;
+  text-decoration: none;
+}
+
+.hostspend-primary {
+  background: #b55335;
+  color: #fff;
+}
+
+.hostspend-secondary {
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.hostspend-ledger {
+  background: #fff9f6;
+  border: 1px solid #ecd0c5;
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  min-width: 0;
+  padding: 24px;
+}
+
+.hostspend-ledger-head,
+.hostspend-entry {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.hostspend-ledger-head > div {
+  display: grid;
+  gap: 4px;
+}
+
+.hostspend-ledger-head span,
+.hostspend-entry small {
+  color: #9d6a59;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.hostspend-ledger-head > span {
+  text-align: right;
+}
+
+.hostspend-total {
+  color: #b55335;
+  font-size: 54px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin: 32px 0 22px;
+}
+
+.hostspend-entry {
+  border-top: 1px dashed #e8cfc5;
+  padding: 15px 0;
+}
+
+.hostspend-entry > span {
+  align-items: center;
+  background: #f8e5dd;
+  border-radius: 9px;
+  color: #b55335;
+  display: inline-flex;
+  flex: 0 0 38px;
+  font-size: 13px;
+  font-weight: 900;
+  height: 38px;
+  justify-content: center;
+}
+
+.hostspend-entry > div {
+  display: grid;
+  flex: 1;
+  gap: 3px;
+  min-width: 0;
+}
+
+.hostspend-entry > strong {
+  white-space: nowrap;
+}
+
+.hostspend-features {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 34px;
+}
+
+.hostspend-features article {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.hostspend-features article > span {
+  color: #b55335;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.hostspend-features h2 {
+  font-size: 22px;
+  margin: 14px 0 9px;
+}
+
+.hostspend-features p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+@media (max-width: 860px) {
+  .hostspend-hero,
+  .hostspend-features {
+    grid-template-columns: 1fr;
+  }
+
+  .hostspend-hero {
+    min-height: auto;
+    padding-top: 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hostspend-page-tools {
+    align-items: flex-start;
+    flex-direction: column-reverse;
+  }
+
+  .hostspend-copy h1 {
+    font-size: 42px;
+  }
+
+  .hostspend-actions,
+  .hostspend-primary,
+  .hostspend-secondary {
+    width: 100%;
+  }
+
+  .hostspend-ledger {
+    padding: 18px;
+  }
+
+  .hostspend-total {
+    font-size: 44px;
+  }
+}
