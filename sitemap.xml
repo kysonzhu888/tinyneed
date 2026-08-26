@@ -26,6 +26,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tinyneed.com/hostspend/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://tinyneed.com/hotspot-guard/changelog/</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
