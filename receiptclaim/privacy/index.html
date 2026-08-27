@@ -12,8 +12,8 @@
     <main class="simple-page legal-page">
       <a class="back-link" href="/">Back to ReceiptClaim</a>
       <h1>ReceiptClaim Privacy Policy</h1>
-      <p><strong>Effective date:</strong> August 22, 2026</p>
-      <p>ReceiptClaim is a receipt splitting app published by TinyNeed. It creates no account, shows no ads, tracks no location, touches no payment account, and sells no personal data. Everything below describes the only ways receipt data is handled.</p>
+      <p><strong>Effective date:</strong> August 27, 2026</p>
+      <p>ReceiptClaim is a receipt splitting app published by TinyNeed. An account is optional: splitting continues to work without signing in. ReceiptClaim shows no ads, tracks no location, touches no payment account, and sells no personal data. Everything below describes the only ways receipt and account data are handled.</p>
       <p>Cloud recognition is optional. Because it sends and retains data outside your device, the cloud and on-device paths are described separately, and the app tells you which one it is about to use. Anyone who accepted the earlier non-retention disclosure must accept the new retention disclosure before another cloud scan is sent.</p>
 
       <h2>On-device recognition</h2>
@@ -26,11 +26,16 @@
       <p><strong>Global route.</strong> The receipt image is sent over an encrypted connection to the ReceiptClaim Cloudflare service. The app-owned copy is stored in Cloudflare R2. Recognition requests are routed through <a href="https://openrouter.ai/privacy/">OpenRouter</a> to the configured AI model providers, currently Google and OpenAI. OpenRouter says prompt and response logging is off by default, but it stores request metadata and may process files for routing, abuse prevention, security, billing, or legal compliance. Model providers have their own data practices.</p>
       <p><strong>Mainland China route.</strong> The receipt image is sent over an encrypted connection to <code>rc.gojito.top</code>. The app-owned copy is stored on the ReceiptClaim server in mainland China, and recognition is performed by Alibaba Cloud Model Studio (Bailian/Qwen) in a dedicated mainland China workspace. Alibaba Cloud states that Model Studio does not use customer data for model training and that the selected region determines its access and storage location. See Alibaba Cloud's <a href="https://www.alibabacloud.com/help/en/model-studio/privacy-notice">Model Studio privacy notice</a> and <a href="https://www.alibabacloud.com/help/en/model-studio/regions/">region documentation</a>.</p>
       <p>For either cloud route, ReceiptClaim stores the receipt photo, the raw recognition response and parsed result, the app-generated Device ID, a scan reference, and route, model, timing, outcome, and request metadata. We use this archive to investigate recognition errors, improve accuracy, and respond to support and deletion requests.</p>
-      <p>We do not send participant names, item claims, adjustments, or settlement data to cloud recognition. Those remain on your device.</p>
+      <p>We do not send participant names, item claims, adjustments, or settlement data to cloud recognition. Those remain on your device unless you separately sign in and use account history sync as described below.</p>
+
+      <h2>Optional account and history sync</h2>
+      <p>You may sign in with Apple on iOS or Google on Android to connect ReceiptClaim purchases, scan balance, and settled receipt history across your devices. Apple or Google supplies a signed identity token. ReceiptClaim verifies that token and stores the provider name, the provider-specific account identifier, an optional display name or email hint, the ReceiptClaim account identifier, linked Device IDs, and account creation and update times. ReceiptClaim stores its own session token in the device Keychain or Keystore.</p>
+      <p>When signed in, ReceiptClaim syncs up to the latest 200 settled receipt records. A record can include item descriptions and amounts, participant names, claims, tax, tip, discounts, currency, and settlement details. Receipt images and raw OCR text are not included in account history sync. Deletion markers are synced so a receipt deleted on one device is not restored by an older device.</p>
+      <p>The Global Cloudflare service stores account records, linked Device IDs, entitlement links, sessions, settled receipt records, and deletion markers. Account history sync is separate from cloud recognition consent: signing in does not upload a receipt photo or enable cloud recognition.</p>
 
       <h2>What we store</h2>
       <p>To count cloud scans against your monthly allowance, the app generates a random Device ID the first time cloud recognition is used and stores it on your device. It is not derived from your hardware and carries no meaning outside ReceiptClaim. Our service stores that identifier with scan counts, purchase entitlements or credits, and each retained cloud-scan archive. The recognition model does not need the Device ID and does not receive it as part of the recognition prompt.</p>
-      <p>Local receipt drafts, item claims, participant names, adjustments, and history stay on your device.</p>
+      <p>Local receipt drafts stay on your device. Item claims, participant names, adjustments, and settled history also stay on your device while signed out; when signed in, the latest settled records are synced as described above.</p>
 
       <h2>Website analytics</h2>
       <p>This website is hosted and protected by Cloudflare and uses Cloudflare Web Analytics to measure aggregate site traffic and performance. It does not accept or upload receipt photos, recognized receipt text, participant names, or settlement data, so that content is not part of website analytics. Cloudflare may process website request and analytics data under its <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a>.</p>
@@ -40,6 +45,7 @@
 
       <h2>Storage and deletion</h2>
       <p>The current draft remains on your device until you start another receipt, clear the app's storage, or uninstall the app. Starting another receipt clears the saved draft inside ReceiptClaim.</p>
+      <p>A signed-in user can initiate permanent account deletion from the account screen. For Sign in with Apple, ReceiptClaim first asks Apple to revoke the authorization grant when a server-held refresh token is available. Deletion then removes the ReceiptClaim account profile, identity mapping, sessions, linked devices, and synced receipt history. Store purchase records and subscriptions are controlled by Apple or Google; deleting a ReceiptClaim account does not cancel a store subscription or erase the store's purchase record. Local receipts that were kept only on the device remain until removed in the app, cleared with app storage, or removed by uninstalling.</p>
       <p>Cloud-scan archives currently have no automatic expiry. They are retained until removed for service operations or in response to a valid privacy request. To request deletion, email <a href="mailto:hello@tinyneed.com?subject=ReceiptClaim%20deletion%20request">hello@tinyneed.com</a> and include the Device ID shown in Support info or the scan reference shown with the affected scan. Do not attach the receipt itself unless you are comfortable sharing it by email.</p>
 
       <h2>Sharing</h2>
