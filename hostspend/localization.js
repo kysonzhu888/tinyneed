@@ -16,8 +16,12 @@ function applyLocale(root, locale) {
     button.setAttribute("aria-pressed", String(button.dataset.locale === locale));
   });
 
-  root.querySelectorAll("[data-hostspend-link]").forEach((link) => {
+  const localizedLinks = [root, ...root.querySelectorAll("[data-hostspend-link], [data-kindyframe-link]")];
+  localizedLinks.filter((link) => link.matches?.("[data-hostspend-link]")).forEach((link) => {
     link.href = `/hostspend/?lang=${encodeURIComponent(locale)}`;
+  });
+  localizedLinks.filter((link) => link.matches?.("[data-kindyframe-link]")).forEach((link) => {
+    link.href = `https://photo.gojito.top/?lang=${encodeURIComponent(locale)}`;
   });
 
   if (root.dataset.updateDocumentLocale !== "true") return;
@@ -32,7 +36,7 @@ function applyLocale(root, locale) {
 }
 
 export function initHostSpendLocalization(root = document) {
-  root.querySelectorAll("[data-hostspend-localized]").forEach((localizedRoot) => {
+  root.querySelectorAll("[data-hostspend-localized], [data-kindyframe-localized]").forEach((localizedRoot) => {
     let locale = resolveHostSpendLocale(window.location.search, navigator.language || "");
     applyLocale(localizedRoot, locale);
 

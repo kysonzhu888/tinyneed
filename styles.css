@@ -69,6 +69,13 @@ a {
   gap: 18px;
 }
 
+.brand,
+.footer a {
+  align-items: center;
+  display: inline-flex;
+  min-height: 44px;
+}
+
 .topnav a,
 .footer a {
   color: var(--muted);
@@ -576,6 +583,60 @@ button,
   color: var(--primary-strong);
   display: block;
   overflow-wrap: anywhere;
+}
+
+.kindyframe-tool {
+  background: linear-gradient(145deg, #fff8f2, var(--panel) 58%);
+  border-color: rgba(229, 111, 85, 0.42);
+  overflow: hidden;
+  position: relative;
+}
+
+.kindyframe-tool h3,
+.kindyframe-tool p {
+  max-width: calc(100% - 78px);
+}
+
+.kindyframe-tool strong { color: #d95f46; }
+
+.kindyframe-photo-mark {
+  background: #fff;
+  border: 1px solid #ead7d1;
+  border-radius: 8px;
+  box-shadow: 0 10px 26px rgba(76, 43, 28, 0.12);
+  height: 92px;
+  padding: 7px;
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  transform: rotate(3deg);
+  width: 66px;
+}
+
+.kindyframe-photo-mark i {
+  background: radial-gradient(circle at 50% 34%, #f1c7ae 0 14%, transparent 15%), linear-gradient(155deg, #c5d8e9 0 52%, #f5f2ea 53%);
+  border-radius: 4px;
+  display: block;
+  height: 70px;
+  width: 50px;
+}
+
+.kindyframe-photo-mark b {
+  background: #e56f55;
+  border-radius: 999px;
+  bottom: -8px;
+  color: #fff;
+  font-size: 9px;
+  padding: 4px 7px;
+  position: absolute;
+  right: -12px;
+  white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+  .kindyframe-tool h3,
+  .kindyframe-tool p { max-width: calc(100% - 64px); }
+  .kindyframe-photo-mark { right: 14px; }
 }
 
 .hub-note {
